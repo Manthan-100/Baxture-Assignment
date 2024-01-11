@@ -1,14 +1,20 @@
 import express from "express";
 import expressUpload from "express-fileupload";
 import router from "./routes.js";
+import cacheDb from "./database/cache-db.js";
 
 class App {
     constructor() {
     this.PORT = 5000;
 
     this.configureApp()
+        .then(async (app) => {
+            await cacheDb.connect();
+            console.log("2. Database connection is succesfull")
+            return app;
+        }) 
         .then((app) => {
-            console.log("2. Configure Error Handler")
+            console.log("3. Configure Error Handler")
             return this.configureErrorHandler(app);
         })
         .then((app) => {
