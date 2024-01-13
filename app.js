@@ -10,11 +10,10 @@ class App {
     this.configureApp()
         .then(async (app) => {
             await cacheDb.connect();
-            console.log("2. Database connection is succesfull")
             return app;
         }) 
         .then((app) => {
-            console.log("3. Configure Error Handler")
+            console.log("2. Configure Error Handler")
             return this.configureErrorHandler(app);
         })
         .then((app) => {
